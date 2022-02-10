@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="GetHotels" doc:id="259c0cb7-295c-4671-89d5-fd013177c6a2" >
+		<db:select doc:id="9566ad0f-9ff1-466c-a118-79fe46ddf371" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from hotels]]></db:sql>
+		</db:select>
+		<logger level="INFO" doc:name="Logger" doc:id="7fa48f0c-98e0-4582-9c59-5a6ad8d0d665" message="#[payload]"/>
+	</flow>
+	<flow name="GetHotelsId" doc:id="db6cc0b6-4b32-4dac-8d3a-5e9ce1b0b6df" >
+		<db:select doc:name="Select" doc:id="45edfc1a-86ef-4c5c-ae8c-c615a9d558f5" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from hotels where hotelId = :hotelId]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+hotelId : attributes.uriParams.hotelId
+}]]]></db:input-parameters>
+		</db:select>
+	</flow>
+</mule>

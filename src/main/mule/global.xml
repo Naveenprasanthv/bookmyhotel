@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b4934f6e-fa9f-4456-8985-837f2f2a2fcc" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="a8fa69d6-988f-4847-a7ac-d12dd1dad2e3" file="config.yaml" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="734725cb-d3a1-4750-9aa5-8c57540ba53b" >
+		<db:my-sql-connection host="${mysql.server}" port="${mysql.port}" user="${mysql.username}" password="${mysql.password}" database="${mysql.dbname}" />
+	</db:config>
+
+</mule>
